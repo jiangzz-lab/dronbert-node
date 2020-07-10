@@ -8,8 +8,9 @@ An [Express server](http://expressjs.com) implementation
 
 ## How to run
 
-```
-congiure the .env file with your own ports and stripe keys 
+1. congiure the .env file with your own ports and stripe keys 
+
+2. run with npm
 
 ```
 npm install
@@ -17,4 +18,8 @@ npm start
 
 ```
 to see real-time update while changing the code, run with dev mode:
+
+```
 npm run dev
+
+```
