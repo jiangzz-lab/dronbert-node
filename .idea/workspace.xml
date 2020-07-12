@@ -19,7 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4c04d57d-637e-476e-80e2-ae3d65feddb2" name="Default Changelist" comment="" />
+    <list default="true" id="4c04d57d-637e-476e-80e2-ae3d65feddb2" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,7 +45,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/WebstormProjects/nba-web" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -63,7 +66,8 @@
       <updated>1594330161806</updated>
       <workItem from="1594330162938" duration="9467000" />
       <workItem from="1594355901156" duration="7719000" />
-      <workItem from="1594403712647" duration="746000" />
+      <workItem from="1594403712647" duration="9010000" />
+      <workItem from="1594472320517" duration="17270000" />
     </task>
     <servers />
   </component>
@@ -86,10 +90,11 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="421" y="96" key="FileChooserDialogImpl" timestamp="1594355911385">
+    <state x="441" y="61" key="FileChooserDialogImpl" timestamp="1594569452923">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1594355911385" />
+    <state x="421" y="96" key="FileChooserDialogImpl/0.0.1280.680/1920.0.1920.1040@0.0.1280.680" timestamp="1594504251768" />
+    <state x="441" y="61" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1594569452923" />
     <state width="1259" height="163" key="GridCell.Tab.0.bottom" timestamp="1594330206443">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
