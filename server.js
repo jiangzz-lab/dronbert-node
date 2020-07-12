@@ -97,6 +97,82 @@ app.post('/tracking', (req, res) => {
 })
 
 
+// app.post('/login', ())
+app.post('/login', (req, res) => {
+  if (!req.body) {
+      res.send("No data received");
+  }
+
+  if (!req.body.user_id) {
+      res.send("No username found")
+  }
+
+  if (!req.body.password) {
+      res.send("No password found")
+  }
+
+console.log(req.body);
+  axios.post(`http://localhost:${portBackend}/delivery/login`, {
+      "user_id": req.body.user_id,
+      "password": req.body.password,
+  })
+  .then((response) => {
+  console.log(response.data);
+      res.send(response.data)
+  })
+  .catch((error) => {
+      res.send(error)
+  })
+})
+
+// app.post('/register', () => ())
+app.post('/register', (req, res) => {
+  if (!req.body) {
+      res.send("No data received");
+  }
+
+  if (!req.body.user_id) {
+      res.send("No username found")
+  }
+
+  if (!req.body.password) {
+      res.send("No password found")
+  }
+
+  if (!req.body.last_name) {
+      res.send("No last name found")
+  }
+
+  if (!req.body.first_name) {
+      res.send("No first name found")
+  }
+
+  if (!req.body.email_address) {
+      res.send("No email address found")
+  }
+
+  if (!req.body.phone_number) {
+      res.send("No phone number found")
+  }
+
+console.log(req.body);
+  axios.post(`http://localhost:${portBackend}/delivery/register`, {
+      "user_id": req.body.user_id,
+      "password": req.body.password,
+      "last_name":"xxx",
+      "first_name":"xxx",
+      "email_address":"xxx",
+      "phone_number":"xxx",
+  })
+  .then((response) => {
+  console.log(response.data);
+      res.send(response.data)
+  })
+  .catch((error) => {
+      res.send(error)
+  })
+})
+
 // routers for payment
 // get stripe public key from /stripe-key by GET method
 
