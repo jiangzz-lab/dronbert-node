@@ -96,6 +96,45 @@ app.post('/tracking', (req, res) => {
       })
 })
 
+app.post('/neworder', (req, res) => {
+    if (!req.body) {
+        res.send("No data received");
+    }
+
+    if (!req.body.deliveryTime) {
+        res.send("No delivery time!");
+    }
+
+    console.log(req.body);
+    axios.post(`http://localhost:${portBackend}/delivery/neworder`, {
+        "senderFisrtName":req.body.senderFisrtName,
+        "senderLastName":req.body.senderLastName,
+        "senderAddress": req.body.senderAddress,
+        "senderPhoneNumber":req.body.senderPhoneNumber,
+        "senderEmail":req.body.senderEmail,
+        "recipentFisrtName":req.body.recipentFisrtName,
+        "recipentLastName":req.body.recipentLastName,
+        "recipentAddress": req.body.recipentAddress,
+        "recipentPhoneNumber":req.body.recipentPhoneNumber,
+        "recipentEmail": req.body.recipentEmail,
+        "packageWeight" : req.body.packageWeight,
+        "packageHeight" : req.body.packageHeight,
+        "packageLength" : req.body.packageLength,
+        "packageWidth" : req.body.packageWidth,
+        "carrier" : req.body.carrier,
+        "totalCost" : req.body.totalCost,
+        "deliveryTime": req.body.deliveryTime,
+    })
+        .then((response) => {
+            console.log(response.data);
+            res.send(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+            res.send(error);
+        })
+});
+
 
 // app.post('/login', ())
 app.post('/login', (req, res) => {
