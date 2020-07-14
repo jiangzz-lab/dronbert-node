@@ -107,10 +107,10 @@ console.log(req.body);
   axios.post(`http://localhost:${portBackend}/delivery/register`, {
       "user_id": req.body.user_id,
       "password": req.body.password,
-      "last_name":"xxx",
-      "first_name":"xxx",
-      "email_address":"xxx",
-      "phone_number":"xxx",
+      "last_name":req.body.last_name,
+      "first_name":req.body.first_name,
+      "email_address":req.body.email_address,
+      "phone_number":req.body.phone_number,
   })
   .then((response) => {
   console.log(response.data);
