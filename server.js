@@ -19,22 +19,24 @@ app.get('/', (req, res) => {
 const portBackend = process.env.PORT_BACKEND || 8080;
 // transfer ship information from client to java servlet /recommendation
 app.post('/recommendation', (req, res) => {
-  if (!req.body) {
+
+   if (!req.body) {
     res.send("No data received");
   }
 
-  if (!req.body.oneAddr) {
+  if (!req.body.senderAddr) {
     res.send("No oneAddr found")
   }
 
-  if (!req.body.twoAddr) {
+  if (!req.body.receiverAddr) {
     res.send("No twoAddr found")
   }
 
   console.log(req.body);
   axios.post(`http://localhost:${portBackend}/delivery/recommendation`, {
-    "oneAddr": req.body.oneAddr,
-    "twoAddr": req.body.twoAddr,
+    "senderAddr": req.body.senderAddr,
+    "receiverAddr": req.body.receiverAddr,
+    "weight": req.body.weight,
   })
       .then((response) => {
         console.log(response.data);
@@ -44,6 +46,95 @@ app.post('/recommendation', (req, res) => {
         res.send(error)
       })
 })
+
+app.post('/validAddr', (req, res) => {
+  if (!req.body) {
+    res.send("No data received");
+  }
+
+  if (!req.body.senderAddr) {
+    res.send("No oneAddr found")
+  }
+
+  if (!req.body.receiverAddr) {
+    res.send("No twoAddr found")
+  }
+  console.log(req.body);
+  axios.post(`http://localhost:${portBackend}/delivery/validaddr`, {
+    "senderAddr": req.body.senderAddr,
+    "receiverAddr": req.body.receiverAddr,
+  })
+      .then((response) => {
+        console.log(response.data);
+        res.send(response.data)
+      })
+      .catch((error) => {
+        res.send(error)
+      })
+})
+
+// tracking
+app.post('/tracking', (req, res) => {
+  if (!req.body) {
+    res.send("No data received");
+  }
+
+  if (!req.body.tracking_id) {
+    res.send("No tracking id found")
+  }
+
+  console.log(req.body);
+  axios.post(`http://localhost:${portBackend}/delivery/tracking`, {
+    "tracking_id": req.body.tracking_id,
+  })
+      .then((response) => {
+        console.log(response.data);
+        res.send(response.data)
+      })
+      .catch((error) => {
+        res.send(error)
+      })
+})
+
+app.post('/neworder', (req, res) => {
+    if (!req.body) {
+        res.send("No data received");
+    }
+
+    if (!req.body.deliveryTime) {
+        res.send("No delivery time!");
+    }
+
+    console.log(req.body);
+    axios.post(`http://localhost:${portBackend}/delivery/neworder`, {
+        "senderFisrtName":req.body.senderFisrtName,
+        "senderLastName":req.body.senderLastName,
+        "senderAddress": req.body.senderAddress,
+        "senderPhoneNumber":req.body.senderPhoneNumber,
+        "senderEmail":req.body.senderEmail,
+        "recipentFisrtName":req.body.recipentFisrtName,
+        "recipentLastName":req.body.recipentLastName,
+        "recipentAddress": req.body.recipentAddress,
+        "recipentPhoneNumber":req.body.recipentPhoneNumber,
+        "recipentEmail": req.body.recipentEmail,
+        "packageWeight" : req.body.packageWeight,
+        "packageHeight" : req.body.packageHeight,
+        "packageLength" : req.body.packageLength,
+        "packageWidth" : req.body.packageWidth,
+        "carrier" : req.body.carrier,
+        "totalCost" : req.body.totalCost,
+        "deliveryTime": req.body.deliveryTime,
+    })
+        .then((response) => {
+            console.log(response.data);
+            res.send(response.data);
+        })
+        .catch((error) => {
+            console.log(error);
+            res.send(error);
+        })
+});
+
 
 // app.post('/login', ())
 app.post('/login', (req, res) => {
@@ -129,18 +220,18 @@ app.get("/stripe-key", (req, res) => {
 });
 
 // helper function to calculate amount to charge
-const calculateOrderAmount = items => {
+const calculateOrderAmount = price => {
   // Replace this constant with a calculation of the order's amount
   // You should always calculate the order total on the server to prevent
   // people from directly manipulating the amount on the client
-  return 1400;
+  return Number(price);
 };
 
 // make payment by sending card information to /pay by POST method
 app.post("/pay", async (req, res) => {
-  const { paymentMethodId, items, currency } = req.body;
+  const { paymentMethodId, price, currency } = req.body;
 
-  const orderAmount = calculateOrderAmount(items);
+  const orderAmount = calculateOrderAmount(price);
 
   try {
     // Create new PaymentIntent with a PaymentMethod ID from the client.
