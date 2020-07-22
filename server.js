@@ -17,6 +17,43 @@ app.get('/', (req, res) => {
 })
 
 const portBackend = process.env.PORT_BACKEND || 8080;
+
+// transfer to /autocomplete
+app.post('/autocomplete', (req, res) => {
+    console.log(req);
+    if (!req.body) {
+        res.send("No data received");
+    }
+
+    if (!req.body.address) {
+        res.send("No address found");
+    }
+    const address = req.body.address;
+
+    // This is for testing without call the backend API
+    res.send([
+        {
+            address: address,
+            zipCode: '94043',
+        },
+        {
+            address: address,
+            zipCode: '94025',
+        },
+    ]);
+
+    // get auotcompelete address from backend API
+ /*    axios.post(`http://localhost:${portBackend}/delivery/autocomplete`, {
+        "address" : address,
+    })
+        .then(response => {
+            console.log(response.data);
+            res.send(response.data);
+        })
+        .catch(error => console.log(error)); */
+
+})
+
 // transfer ship information from client to java servlet /recommendation
 app.post('/recommendation', (req, res) => {
 
@@ -224,7 +261,7 @@ const calculateOrderAmount = price => {
   // Replace this constant with a calculation of the order's amount
   // You should always calculate the order total on the server to prevent
   // people from directly manipulating the amount on the client
-  return Number(price);
+  return Number(price * 100);
 };
 
 // make payment by sending card information to /pay by POST method

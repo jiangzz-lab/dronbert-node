@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4c04d57d-637e-476e-80e2-ae3d65feddb2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
@@ -46,7 +45,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/WebstormProjects/nba-web" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -68,7 +67,10 @@
       <workItem from="1594330162938" duration="9467000" />
       <workItem from="1594355901156" duration="7719000" />
       <workItem from="1594403712647" duration="9010000" />
-      <workItem from="1594472320517" duration="28095000" />
+      <workItem from="1594472320517" duration="30820000" />
+      <workItem from="1594924910176" duration="1491000" />
+      <workItem from="1594947494651" duration="2683000" />
+      <workItem from="1595012124935" duration="16232000" />
     </task>
     <servers />
   </component>
