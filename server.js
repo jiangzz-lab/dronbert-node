@@ -17,6 +17,43 @@ app.get('/', (req, res) => {
 })
 
 const portBackend = process.env.PORT_BACKEND || 8080;
+
+// transfer to /autocomplete
+app.post('/autocomplete', (req, res) => {
+    console.log(req);
+    if (!req.body) {
+        res.send("No data received");
+    }
+
+    if (!req.body.address) {
+        res.send("No address found");
+    }
+    const address = req.body.address;
+
+    // This is for testing without call the backend API
+    res.send([
+        {
+            address: address,
+            zipCode: '94043',
+        },
+        {
+            address: address,
+            zipCode: '94025',
+        },
+    ]);
+
+    // get auotcompelete address from backend API
+ /*    axios.post(`http://localhost:${portBackend}/delivery/autocomplete`, {
+        "address" : address,
+    })
+        .then(response => {
+            console.log(response.data);
+            res.send(response.data);
+        })
+        .catch(error => console.log(error)); */
+
+})
+
 // transfer ship information from client to java servlet /recommendation
 app.post('/recommendation', (req, res) => {
 
@@ -83,17 +120,22 @@ app.post('/tracking', (req, res) => {
     res.send("No tracking id found")
   }
 
-  console.log(req.body);
-  axios.post(`http://localhost:${portBackend}/delivery/tracking`, {
-    "tracking_id": req.body.tracking_id,
-  })
-      .then((response) => {
-        console.log(response.data);
-        res.send(response.data)
-      })
-      .catch((error) => {
-        res.send(error)
-      })
+    // return response without calling the backend
+    res.send({
+        "status": "Order delivered!"
+    })
+
+    // console.log(req.body);
+    // axios.post(`http://localhost:${portBackend}/delivery/tracking`, {
+    //   "tracking_id": req.body.tracking_id,
+    // })
+    //     .then((response) => {
+    //       console.log(response.data);
+    //       res.send(response.data)
+    //     })
+    //     .catch((error) => {
+    //       res.send(error)
+    //     })
 })
 
 app.post('/neworder', (req, res) => {
@@ -150,18 +192,26 @@ app.post('/login', (req, res) => {
       res.send("No password found")
   }
 
-console.log(req.body);
-  axios.post(`http://localhost:${portBackend}/delivery/login`, {
-      "user_id": req.body.user_id,
-      "password": req.body.password,
-  })
-  .then((response) => {
-  console.log(response.data);
-      res.send(response.data)
-  })
-  .catch((error) => {
-      res.send(error)
-  })
+    //sending response without calling the backend
+    res.send({
+        "email_address": "xxx@gmail.com",
+        "user_name": "newUser",
+        "name": "xxx xxx",
+        "phone_number": "xxx-xxx-xxxx",
+        "status": "OK"
+    })
+    // console.log(req.body);
+    //   axios.post(`http://localhost:${portBackend}/delivery/login`, {
+    //       "user_id": req.body.user_id,
+    //       "password": req.body.password,
+    //   })
+    //   .then((response) => {
+    //   console.log(response.data);
+    //       res.send(response.data)
+    //   })
+    //   .catch((error) => {
+    //       res.send(error)
+    //   })
 })
 
 // app.post('/register', () => ())
@@ -194,22 +244,149 @@ app.post('/register', (req, res) => {
       res.send("No phone number found")
   }
 
-console.log(req.body);
-  axios.post(`http://localhost:${portBackend}/delivery/register`, {
-      "user_id": req.body.user_id,
-      "password": req.body.password,
-      "last_name":req.body.last_name,
-      "first_name":req.body.first_name,
-      "email_address":req.body.email_address,
-      "phone_number":req.body.phone_number,
-  })
-  .then((response) => {
-  console.log(response.data);
-      res.send(response.data)
-  })
-  .catch((error) => {
-      res.send(error)
-  })
+    //sending response without calling the backend
+    res.send({
+        "status": "OK"
+    })
+    // console.log(req.body);
+    // axios.post(`http://localhost:${portBackend}/delivery/register`, {
+    //     "user_id": req.body.user_id,
+    //     "password": req.body.password,
+    //     "last_name":"xxx",
+    //     "first_name":"xxx",
+    //     "email_address":"xxx",
+    //     "phone_number":"xxx",
+    // })
+    // .then((response) => {
+    // console.log(response.data);
+    //     res.send(response.data)
+    // })
+    // .catch((error) => {
+    //     res.send(error)
+    // })
+})
+
+// app.post('/activeorder', () => ())
+app.post('/activeorder', (req, res) => {
+    if (!req.body) {
+        res.send("No request body");
+    }
+
+    if (!req.body.user_id) {
+        res.send("user_id not found");
+    }
+
+    // send response without calling the backend
+    res.send([
+        {
+            "Tracking ID": "1234",
+            "Delivery Address": "1600 Amphitheatre Pkwy, Mountain View, CA 94043-1351",
+            "Delivery Time": "2020-07-21 10:50:00",
+            "Order ID": "1",
+            "Recipient": "Sai Chen",
+            "Order Date": "2020-07-21 10:00:00",
+            "Order Status": "active"
+        }
+    ])
+    // // calling the backend
+    // axios.post(`http://localhost:${portBackend}/dronbert/activeorder`, {
+    //   user_id: req.body.user_id
+    // })
+    // .then((response) => {
+    //   console.log(response)
+    //   res.send(response.data);
+    // })
+    // .catch((error) => {
+    //   console.log(`error ${error}`)
+    //   res.send(error);
+    // })
+})
+
+// app.post('/history', () => ())
+app.post('/history', (req, res) => {
+    if (!req.body) {
+        res.send("No request body");
+    }
+
+    if (!req.body.user_id) {
+        res.send("user_id not found");
+    }
+
+    // send response without calling the backend
+    res.send([
+        {
+            "Tracking ID": "1234",
+            "Delivery Address": "1600 Amphitheatre Pkwy, Mountain View, CA 94043-1351",
+            "Delivery Time": "2020-07-21 10:50:00",
+            "Order ID": "1",
+            "Recipient": "Sai Chen",
+            "Order Date": "2020-07-21 10:00:00",
+            "Order Status": "active"
+        },
+        {
+            "Tracking ID": "1232",
+            "Delivery Address": "1 Hacker Way, Menlo Park, CA 94025-1456",
+            "Delivery Time": "2020-07-20 10:50:00",
+            "Order ID": "11",
+            "Recipient": "Bingqi Zhou",
+            "Order Date": "2020-07-20 10:00:00",
+            "Order Status": "complete"
+        }
+    ])
+    // // calling the backend
+    // axios.post(`http://localhost:${portBackend}/dronbert/history`, {
+    //   user_id: req.body.user_id
+    // })
+    // .then((response) => {
+    //   console.log(response)
+    //   res.send(response.data);
+    // })
+    // .catch((error) => {
+    //   console.log(`error ${error}`)
+    //   res.send(error);
+    // })
+})
+
+// app.post('/detail', () => ())
+app.post('/detail', (req, res) => {
+    if (!req.body) {
+        res.send("No request body");
+    }
+
+    if (!req.body.order_id) {
+        res.send("order_id not found");
+    }
+
+    // send response without calling the backend
+    res.send({
+        "machine_type": "robot",
+        "sender_phone": "12345678",
+        "recipient_email": "cs@gmail.com",
+        "sender_name": "Bingqi Zhou",
+        "recipient_address": "1600 Amphitheatre Pkwy, Mountain View, CA 94043-1351",
+        "sender_address": "1 Hacker Way, Menlo Park, CA 94025-1456",
+        "package_height": "11.0",
+        "package_fragile": "0",
+        "package_weight": "10.0",
+        "total cost": "15.0",
+        "recipient_name": "Sai Chen",
+        "delivered_at": "",
+        "sender_email": "zbq@gmail.com",
+        "recipient_phone": "87654321"
+    })
+
+    // // communicate with the backend
+    // axios.post(`http://localhost:${portBackend}/dronbert/detail`, {
+    //   "order_id": req.body.order_id
+    // })
+    // .then((response) => {
+    //   console.log(response)
+    //   res.send(response.data);
+    // })
+    // .catch((error) => {
+    //   console.log(`error ${error}`)
+    //   res.send(error);
+    // })
 })
 
 // routers for payment
@@ -224,7 +401,7 @@ const calculateOrderAmount = price => {
   // Replace this constant with a calculation of the order's amount
   // You should always calculate the order total on the server to prevent
   // people from directly manipulating the amount on the client
-  return Number(price);
+  return Number(price * 100);
 };
 
 // make payment by sending card information to /pay by POST method
