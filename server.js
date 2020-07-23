@@ -366,6 +366,8 @@ app.post('/detail', (req, res) => {
         "recipient_address": "1600 Amphitheatre Pkwy, Mountain View, CA 94043-1351",
         "sender_address": "1 Hacker Way, Menlo Park, CA 94025-1456",
         "package_height": "11.0",
+        "package_length": "11.0",
+        "package_width": "11.0",
         "package_fragile": "0",
         "package_weight": "10.0",
         "total cost": "15.0",
