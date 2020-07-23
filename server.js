@@ -227,7 +227,7 @@ app.post('/login', (req, res) => {
   //sending response without calling the backend
   res.send({
     "email_address": "xxx@gmail.com",
-    "user_name": "newUser",
+    "user_id": "newUser",
     "name": "xxx xxx",
     "phone_number": "xxx-xxx-xxxx",
     "status": "OK"
@@ -418,6 +418,49 @@ app.post('/detail', (req, res) => {
   // .catch((error) => {
   //   console.log(`error ${error}`)
   //   res.send(error);
+  // })
+})
+
+// app.post('/userprofile', () => ())
+app.post('/userprofile', (req, res) => {
+  if (!req.body) {
+    res.send("No request body found");
+  }
+
+  if (!req.body.user_id) {
+    res.send("No user_id found");
+  }
+
+  if (!req.body.email) {
+    res.send("No email found");
+  }
+
+  if (!req.body.name) {
+    res.send("No name found");
+  }
+
+  if (!req.body.phoneNumber) {
+    res.send("No phone number found");
+  }
+
+  //sending response without contacting backend
+  res.send({
+    "updated": "true"
+  })
+  // // communicating with the backend
+  // axios.post(`http://localhost:${portBackend}/dronbert/userprofile`, {
+  //   "user_id": "newUser",
+  //   "email": "xxx@gmail.com",
+  //   "name": "xxx xxx",
+  //   "phoneNumber": "xxx-xxx-xxxx",
+  //   "primaryAddress": "",
+  //   "zipCode": ""
+  // })
+  // .then((response) => {
+  //   res.send(response.data);
+  // })
+  // .catch((error) => {
+  //   res.send(error)
   // })
 })
 
