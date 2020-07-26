@@ -317,20 +317,42 @@ app.post('/history', (req, res) => {
         {
             "Tracking ID": "1234",
             "Delivery Address": "1600 Amphitheatre Pkwy, Mountain View, CA 94043-1351",
-            "Delivery Time": "2020-07-21 10:50:00",
-            "Order ID": "1",
+            // "Delivery Time": "2020-07-21 10:50:00",
+            "Delivery Time": "",
+            "Order ID": "4",
             "Recipient": "Sai Chen",
-            "Order Date": "2020-07-21 10:00:00",
+            // "Order Date": "2020-07-21 10:00:00",
+            "Order Date": "07/26/2020",
             "Order Status": "active"
         },
         {
             "Tracking ID": "1232",
             "Delivery Address": "1 Hacker Way, Menlo Park, CA 94025-1456",
-            "Delivery Time": "2020-07-20 10:50:00",
-            "Order ID": "11",
-            "Recipient": "Bingqi Zhou",
-            "Order Date": "2020-07-20 10:00:00",
+            // "Delivery Time": "2020-07-20 10:50:00",
+            "Delivery Time": "10:50am",
+            "Order ID": "3",
+            "Recipient": "Zhanzhi",
+            // "Order Date": "2020-07-20 10:00:00",
+            "Order Date": "07/20/2020",
             "Order Status": "complete"
+        },
+        {
+          "Tracking ID": "2342",
+          "Delivery Address": "317 Angus Road, Apt D1, San Francisco, 94016",
+          "Delivery Time": "2:50pm",
+          "Order ID": "2",
+          "Recipient": "Adam Denisov",
+          "Order Date": "12/04/2019",
+          "Order Status": "complete"
+        },
+        {
+          "Tracking ID": "",
+          "Delivery Address": "1798 Hickory Ridge Drive, San Francisco, 94017",
+          "Delivery Time": "9:55am",
+          "Order ID": "1",
+          "Recipient": "Emilee Simchenko",
+          "Order Date": "06/28/2019",
+          "Order Status": "complete"
         }
     ])
     // // calling the backend
@@ -357,6 +379,68 @@ app.post('/detail', (req, res) => {
         res.send("order_id not found");
     }
 
+    if (req.body.order_id == 1) {
+      res.send({
+        "machine_type": "robot",
+        "sender_phone": "12345678",
+        "recipient_email": "cs@gmail.com",
+        "sender_name": "Bingqi Zhou",
+        "recipient_address": "1798 Hickory Ridge Drive, San Francisco, 94017",
+        "sender_address": "1 Hacker Way, Menlo Park, CA 94025-1456",
+        "package_height": "8.0",
+        "package_length": "7.0",
+        "package_width": "11.0",
+        "package_fragile": "0",
+        "package_weight": "20.0",
+        "total cost": "25.0",
+        "recipient_name": "Emilee Simchenko",
+        "delivered_at": "9:55am",
+        "sender_email": "zbq@gmail.com",
+        "recipient_phone": "443523458"
+      })
+    }
+
+    if (req.body.order_id == 2) {
+      res.send({
+        "machine_type": "drone",
+        "sender_phone": "435344524",
+        "recipient_email": "cs@gmail.com",
+        "sender_name": "Bingqi Zhou",
+        "recipient_address": "317 Angus Road, Apt D1, San Francisco, 94016",
+        "sender_address": "1 Hacker Way, Menlo Park, CA 94025-1456",
+        "package_height": "10.0",
+        "package_length": "23.0",
+        "package_width": "23.0",
+        "package_fragile": "0",
+        "package_weight": "30.0",
+        "total cost": "19.0",
+        "recipient_name": "Bingqi Zhou",
+        "delivered_at": "2:50 pm",
+        "sender_email": "zbq@gmail.com",
+        "recipient_phone": "70980923"
+      })
+    }
+
+    if (req.body.order_id == 3) {
+      res.send({
+        "machine_type": "robot",
+        "sender_phone": "52352352",
+        "recipient_email": "cs@gmail.com",
+        "sender_name": "Bingqi Zhou",
+        "recipient_address": "1 Hacker Way, Menlo Park, CA 94025-1456",
+        "sender_address": "1 Hacker Way, Menlo Park, CA 94025-1456",
+        "package_height": "8.0",
+        "package_length": "12.0",
+        "package_width": "23.0",
+        "package_fragile": "0",
+        "package_weight": "20.0",
+        "total cost": "18.0",
+        "recipient_name": "Bingqi Zhou",
+        "delivered_at": "10:50am",
+        "sender_email": "zbq@gmail.com",
+        "recipient_phone": "23423328"
+      })
+    }
     // send response without calling the backend
     res.send({
         "machine_type": "robot",
