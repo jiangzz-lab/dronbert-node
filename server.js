@@ -61,8 +61,8 @@ app.post('/recommendation', (req, res) => {
     res.send("No data received");
   }
 
-  if (!req.body.senderAddr) {
-    res.send("No oneAddr found")
+  if (!req.body.address) {
+    res.send("No station address found")
   }
 
   if (!req.body.receiverAddr) {
@@ -70,7 +70,41 @@ app.post('/recommendation', (req, res) => {
   }
 
   console.log(req.body);
-  axios.post(`http://localhost:${portBackend}/delivery/recommendation`, {
+  res.send(
+      [
+          {
+              "carrier": "drone",
+              "price": "7.20",
+              "dispatch within: ": "30 mins"
+          },
+          {
+              "carrier": "drone",
+              "price": "6.60",
+              "dispatch within: ": "1 hour"
+          },
+          {
+              "carrier": "drone",
+              "price": "6.00",
+              "dispatch within: ": "2 hours"
+          },
+          {
+              "carrier": "robot",
+              "price": "3.72",
+              "dispatch within: ": "30 mins"
+          },
+          {
+              "carrier": "robot",
+              "price": "3.41",
+              "dispatch within: ": "1 hour"
+          },
+          {
+              "carrier": "robot",
+              "price": "3.10",
+              "dispatch within: ": "2 hours"
+          }
+      ]
+  )
+ /* axios.post(`http://localhost:${portBackend}/delivery/recommendation`, {
     "senderAddr": req.body.senderAddr,
     "receiverAddr": req.body.receiverAddr,
     "weight": req.body.weight,
@@ -81,7 +115,7 @@ app.post('/recommendation', (req, res) => {
       })
       .catch((error) => {
         res.send(error)
-      })
+      }) */
 })
 
 app.post('/validAddr', (req, res) => {
@@ -358,7 +392,7 @@ app.post('/detail', (req, res) => {
     }
 
     // send response without calling the backend
-    res.send({
+  /*  res.send({
         "machine_type": "robot",
         "sender_phone": "12345678",
         "recipient_email": "cs@gmail.com",
@@ -375,20 +409,20 @@ app.post('/detail', (req, res) => {
         "delivered_at": "",
         "sender_email": "zbq@gmail.com",
         "recipient_phone": "87654321"
-    })
+    }) */
 
     // // communicate with the backend
-    // axios.post(`http://localhost:${portBackend}/dronbert/detail`, {
-    //   "order_id": req.body.order_id
-    // })
-    // .then((response) => {
-    //   console.log(response)
-    //   res.send(response.data);
-    // })
-    // .catch((error) => {
-    //   console.log(`error ${error}`)
-    //   res.send(error);
-    // })
+     axios.post(`http://18.221.255.187/delivery/detail`, {
+       "order_id": req.body.order_id
+     })
+     .then((response) => {
+          console.log(response)
+       res.send(response.data);
+     })
+     .catch((error) => {
+       console.log(`error ${error}`)
+       res.send(error);
+     })
 })
 
 // routers for payment
