@@ -443,6 +443,45 @@ app.post('/detail', (req, res) => {
      })
 })
 
+
+// router to use google distance matrix API
+app.post("/duration", async (req, res) => {
+    if(!req.body) {
+        res.send("no data received!");
+    }
+    if (!req.body.origins) {
+        res.send("no origin address!");
+    }
+    if (!req.body.destinations) {
+        res.send('no destination address!')
+    }
+    console.log(req.body);
+    var distance = require('google-distance-matrix');
+    distance.key('AIzaSyCy_VrkQrprJMRX1PBGVX0VVNgH9h4tFZA');
+    const origins = req.body.origins.map(origin => origin['address']);
+    const destinations = req.body.destinations.map(destination => destination['address']);
+    await distance.matrix(origins, destinations, function (err, distances) {
+        if (err) {
+            return console.log(err);
+        }
+        if(!distances) {
+            return console.log('no distances');
+        }
+        if (distances.status == 'OK') {
+            console.log(distances);
+            console.log(distances.rows);
+            console.log(distances.rows[0]);
+            const durations = distances.rows[0].elements.map((element, index) => {
+                return {
+                    duration: element.duration.value,
+                    status: element.status,
+                }
+            });
+            res.send(durations);
+        }
+    });
+})
+
 // routers for payment
 // get stripe public key from /stripe-key by GET method
 
