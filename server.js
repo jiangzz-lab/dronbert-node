@@ -354,7 +354,7 @@ app.post('/activeorder', (req, res) => {
     // })
 })
 
-// app.post('/history', () => ())
+
 app.post('/history', (req, res) => {
     if (!req.body) {
         res.send("No request body");
@@ -458,6 +458,7 @@ app.post("/duration", async (req, res) => {
     console.log(req.body);
     var distance = require('google-distance-matrix');
     distance.key('AIzaSyCy_VrkQrprJMRX1PBGVX0VVNgH9h4tFZA');
+    distance.units('imperial');
     const origins = req.body.origins.map(origin => origin['address']);
     const destinations = req.body.destinations.map(destination => destination['address']);
     await distance.matrix(origins, destinations, function (err, distances) {
@@ -467,13 +468,14 @@ app.post("/duration", async (req, res) => {
         if(!distances) {
             return console.log('no distances');
         }
-        if (distances.status == 'OK') {
+        if (distances.status === 'OK') {
             console.log(distances);
             console.log(distances.rows);
             console.log(distances.rows[0]);
             const durations = distances.rows[0].elements.map((element, index) => {
                 return {
-                    duration: element.duration.value,
+                    duration: element.status === 'OK'? element.duration.value : Infinity,
+                    distance: element.status === 'OK' ? element.distance.text : 'not accessible',
                     status: element.status,
                 }
             });
