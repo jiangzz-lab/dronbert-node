@@ -443,6 +443,12 @@ app.post('/detail', (req, res) => {
      })
 })
 
+// router to /userprofile
+app.post('/userprofile', async (req, res) => {
+    if(!req.body) {
+        res.send("no data received!");
+    }
+})
 
 // router to use google distance matrix API
 app.post("/duration", async (req, res) => {
