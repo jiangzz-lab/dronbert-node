@@ -154,10 +154,67 @@ app.post('/tracking', (req, res) => {
     res.send("No tracking id found")
   }
 
-    // return response without calling the backend
-    res.send({
-        "status": "Order delivered!"
-    })
+  if (req.body.tracking_id === '1111') {
+    res.send(
+      {
+        "current location": "37.78,-122.48",
+        "estimated delivered time": "2020-07-26 23:30:00",
+        "delay": true,
+        "destination": "37.77325570,-122.43554290",
+        "status": "in transit"
+    
+      }
+    )
+  } 
+  else if (req.body.tracking_id === '2222') {
+    res.send(
+      {
+        "current location": "37.76,-122.46",
+        "estimated delivered time": "2020-07-26 23:30:00",
+        "delay": true,
+        "destination": "37.77325570,-122.43554290",
+        "status": "in transit"
+    
+      }
+    ) 
+  }
+  else if (req.body.tracking_id === '3333') {
+    res.send(
+      {
+        "current location": "37.75,-122.44",
+        "estimated delivered time": "2020-07-26 23:30:00",
+        "delay": true,
+        "destination": "37.77325570,-122.43554290",
+        "status": "in transit"
+      }
+    ) 
+  } 
+  else {
+    res.send(
+      {
+        "current location": "37.77148800,-122.43540050",
+        "estimated delivered time": "2020-07-26 23:30:00",
+        "delay": true,
+        "destination": "37.77325570,-122.43554290",
+        "status": "in transit"
+      }
+  
+    // // return response without calling the backend
+    // res.send({
+    //     "status": "Order delivered!"
+    // })
+
+    // res.send([
+    //   {
+    //     "current location": "37.77148800,-122.43540050",
+    //     "estimated delivered time": "2020-07-26 23:30:00",
+    //     "delay": true,
+    //     "destination": "37.77325570,-122.43554290",
+    //     "status": "in transit"
+    
+    //   }
+    )
+  }
 
     // console.log(req.body);
     // axios.post(`http://localhost:${portBackend}/delivery/tracking`, {
@@ -170,7 +227,7 @@ app.post('/tracking', (req, res) => {
     //     .catch((error) => {
     //       res.send(error)
     //     })
-})
+});
 
 app.post('/neworder', (req, res) => {
     if (!req.body) {
