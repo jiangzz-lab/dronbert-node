@@ -5,6 +5,8 @@ const cors = require('cors');
 // Replace if using a different env file or config
 const env = require("dotenv").config({ path: "./.env" });
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+const initTime = Date.parse(new Date);
+console.log(initTime/1000);
 
 app.use(express.static(process.env.STATIC_DIR));
 app.use(express.json());
@@ -156,10 +158,13 @@ app.post('/tracking', (req, res) => {
   }
 
   if (req.body.tracking_id === '1111') {
+      const time = Date.parse(new Date());
+      console.log(time/1000 % 10);
+      const lat = time / 1000 % 50 / 1000 + 37.75;
     res.send(
       {
-        "current location": "37.78,-122.48",
-        "estimated delivered time": "2020-07-26 23:30:00",
+        "current location": `${lat.toString()},-122.48`,
+        "estimated delivered time": "2020-07-29 21:30:00",
         "delay": true,
         "destination": "37.77325570,-122.43554290",
         "status": "in transit"
@@ -170,10 +175,10 @@ app.post('/tracking', (req, res) => {
     res.send(
       {
         "current location": "37.76,-122.46",
-        "estimated delivered time": "2020-07-26 23:30:00",
+        "estimated delivered time": "2020-07-29 22:30:00",
         "delay": true,
         "destination": "37.77325570,-122.43554290",
-        "status": "in transit"
+        "status": "dispatched"
     
       }
     ) 
@@ -182,10 +187,10 @@ app.post('/tracking', (req, res) => {
     res.send(
       {
         "current location": "37.75,-122.44",
-        "estimated delivered time": "2020-07-26 23:30:00",
+        "estimated delivered time": "2020-07-29 23:30:00",
         "delay": true,
         "destination": "37.77325570,-122.43554290",
-        "status": "in transit"
+        "status": "ordered"
       }
     ) 
   } 
@@ -198,21 +203,7 @@ app.post('/tracking', (req, res) => {
         "destination": "37.77325570,-122.43554290",
         "status": "in transit"
       }
-  
-    // // return response without calling the backend
-    // res.send({
-    //     "status": "Order delivered!"
-    // })
 
-    // res.send([
-    //   {
-    //     "current location": "37.77148800,-122.43540050",
-    //     "estimated delivered time": "2020-07-26 23:30:00",
-    //     "delay": true,
-    //     "destination": "37.77325570,-122.43554290",
-    //     "status": "in transit"
-    
-    //   }
     )
   }
 
