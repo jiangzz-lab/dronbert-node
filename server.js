@@ -146,6 +146,7 @@ app.post('/validAddr', (req, res) => {
 
 // tracking
 app.post('/tracking', (req, res) => {
+    console.log(req.body);
   if (!req.body) {
     res.send("No data received");
   }
@@ -162,7 +163,6 @@ app.post('/tracking', (req, res) => {
         "delay": true,
         "destination": "37.77325570,-122.43554290",
         "status": "in transit"
-    
       }
     )
   } 
